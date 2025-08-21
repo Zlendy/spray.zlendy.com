@@ -152,11 +152,20 @@ setInterval(function(){
 
 }, 200);
 
+/**
+ * @param {FileList} files
+ */
+function getOutputFilename(files) {
+	if (files.length !== 1) return "spray";
+
+	return files[0].name.replace(/\.[^/.]+$/, ""); // Strips off file extension
+}
+
 function handleFileSelect(evt) {
 	var files = evt.target.files; // FileList object
 	if (files.length == 0)
 		return;
-  document.getElementById('outputFilename').value = 'spray';
+  document.getElementById('outputFilename').value = getOutputFilename(files);
 	document.getElementById('saveButton').disabled = true;
 	document.getElementById('files0').disabled = true;
 	
